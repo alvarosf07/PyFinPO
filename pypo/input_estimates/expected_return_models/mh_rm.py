@@ -2,7 +2,7 @@ import warnings
 
 import pandas as pd
 
-from pypo.utils.returns import _check_returns, returns_from_prices, prices_from_returns
+from pypo.utils.return_utils import _check_returns, returns_from_prices, prices_from_returns
 
 
 def mh_rm(
