@@ -7,7 +7,7 @@ from pypo.utils.return_utils import returns_from_prices
 from pypo.utils.risk_utils import fix_nonpositive_semidefinite
 
 
-def semicovariance(
+def semi_cov(
     prices,
     returns_data=False,
     benchmark=0.000079,

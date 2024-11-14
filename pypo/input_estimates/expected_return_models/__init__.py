@@ -26,7 +26,12 @@ from .ewmh_rm import ewmh_rm
 from .capm_rm import capm_rm
 
 # Define what is exported when using 'from models import *'
-__all__ = ['compute_expected_return','mh_rm','ewmh_rm','capm_rm']
+__all__ = [
+    'compute_expected_return',
+    'mh_rm',
+    'ewmh_rm',
+    'capm_rm'
+]
 
 
 # Master function that centralizes all expected return models.

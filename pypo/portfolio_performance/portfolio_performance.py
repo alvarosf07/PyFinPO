@@ -1,7 +1,13 @@
+"""
+This submodule defines a general utility function ``portfolio_performance`` to
+evaluate return and risk for a given set of portfolio weights.
+"""
+
 import numpy as np
 import pandas as pd
 
 from pypo.portfolio_optimization.po_objective_functions import objective_functions
+
 
 def portfolio_performance(
     weights, expected_returns, cov_matrix, verbose=False, risk_free_rate=0.02

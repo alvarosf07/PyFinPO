@@ -1,17 +1,41 @@
 """
+The ``risk_models`` module provides functions for estimating the covariance matrix given
+historical returns.
 
+The format of the data input is the same as that in :ref:`expected-returns`.
+
+**Currently implemented:**
+
+- fix non-positive semidefinite matrices
+- general risk matrix function, allowing you to run any risk model from one function.
+- sample covariance (sample_cov)
+- semicovariance (semi_cov)
+- exponentially weighted covariance (ew_cov)
+- minimum covariance determinant
+- shrunk covariance matrices (cov_shrinkage):
+
+    - manual shrinkage
+    - Ledoit Wolf shrinkage
+    - Oracle Approximating shrinkage
+
+- covariance to correlation matrix
 """
 
 # Import all return models
 from .sample_cov import sample_cov
-from .semi_cov import semicovariance
-from .exp_cov import exp_cov
-
-from pypo.input_estimates.robust_models.cov_shrinkage_rm import CovarianceShrinkage
+from .semi_cov import semi_cov
+from .ew_cov import ew_cov
+from .cov_shrinkage import CovarianceShrinkage
 
 
 # Define what is exported when using 'from models import *'
-__all__ = ['compute_risk_matrix','sample_cov','semi_cov','exp_cov']
+__all__ = [
+    'compute_risk_matrix',
+    'sample_cov',
+    'semi_cov',
+    'ew_cov',
+    'CovarianceShrinkage'
+]
 
 
 # Master function that centralizes all expected return models.
@@ -44,9 +68,9 @@ def compute_risk_matrix(prices, method="sample_cov", **kwargs):
     if method == "sample_cov":
         return sample_cov(prices, **kwargs)
     elif method == "semicovariance" or method == "semivariance":
-        return semicovariance(prices, **kwargs)
+        return semi_cov(prices, **kwargs)
     elif method == "exp_cov":
-        return exp_cov(prices, **kwargs)
+        return ew_cov(prices, **kwargs)
     elif method == "ledoit_wolf" or method == "ledoit_wolf_constant_variance":
         return CovarianceShrinkage(prices, **kwargs).ledoit_wolf()
     elif method == "ledoit_wolf_single_factor":

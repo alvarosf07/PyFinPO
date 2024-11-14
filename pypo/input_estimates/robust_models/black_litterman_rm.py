@@ -12,7 +12,8 @@ import warnings
 import numpy as np
 import pandas as pd
 
-from . import base_optimizer
+from pypo.portfolio_optimization.po_optimizers import BaseOptimizer
+from pypo.portfolio_performance import portfolio_performance
 
 
 def market_implied_prior_returns(
@@ -83,7 +84,7 @@ def market_implied_risk_aversion(market_prices, frequency=252, risk_free_rate=0.
     return (r - risk_free_rate) / var
 
 
-class BlackLittermanModel(base_optimizer.BaseOptimizer):
+class BlackLittermanModel(BaseOptimizer):
 
     """
     A BlackLittermanModel object (inheriting from BaseOptimizer) contains requires
@@ -139,6 +140,12 @@ class BlackLittermanModel(base_optimizer.BaseOptimizer):
         **kwargs
     ):
         """
+        A BlackLittermanModel object (inheriting from BaseOptimizer) contains requires
+        a specific input format, specifying the prior, the views, the uncertainty in views,
+        and a picking matrix to map views to the asset universe. We can then compute
+        posterior estimates of returns and covariance. Helper methods have been provided
+        to supply defaults where possible.
+
         :param cov_matrix: NxN covariance matrix of returns
         :type cov_matrix: pd.DataFrame or np.ndarray
         :param pi: Nx1 prior estimate of returns, defaults to None.
@@ -477,7 +484,7 @@ class BlackLittermanModel(base_optimizer.BaseOptimizer):
         """
         if self.posterior_cov is None:
             self.posterior_cov = self.bl_cov()
-        return base_optimizer.portfolio_performance(
+        return portfolio_performance(
             self.weights,
             self.posterior_rets,
             self.posterior_cov,

@@ -7,7 +7,7 @@ from pypo.utils.return_utils import returns_from_prices
 from pypo.utils.risk_utils import fix_nonpositive_semidefinite, _pair_exp_cov
 
 
-def exp_cov(
+def ew_cov(
     prices, returns_data=False, span=180, frequency=252, log_returns=False, **kwargs
 ):
     """

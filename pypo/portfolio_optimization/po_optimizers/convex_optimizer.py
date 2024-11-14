@@ -10,7 +10,7 @@ import numpy as np
 import scipy.optimize as sco
 import cvxpy as cp
 
-from .base_optimizer import BaseOptimizer
+from pypo.portfolio_optimization.po_optimizers import BaseOptimizer
 from pypo.utils import exceptions
 from pypo.utils.optimization_utils import _get_all_args
 
