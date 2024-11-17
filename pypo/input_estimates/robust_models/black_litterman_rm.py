@@ -18,7 +18,7 @@ from pypo.portfolio_performance import portfolio_performance
 
 def market_implied_prior_returns(
     market_caps, risk_aversion, cov_matrix, risk_free_rate=0.02
-):
+    ):
     """
     Compute the prior estimate of returns implied by the market weights.
     In other words, given each asset's contribution to the risk of the market

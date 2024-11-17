@@ -17,7 +17,7 @@ import scipy.cluster.hierarchy as sch
 
 from pypo.input_estimates import risk_models
 from pypo.portfolio_optimization.po_models import MeanVariancePO, CLAPO
-from pypo.utils import exceptions 
+from pypo.utils import exceptions, risk_utils
 
 try:
     plt.style.use("seaborn-v0_8-deep")
@@ -64,7 +64,7 @@ def plot_covariance(cov_matrix, plot_correlation=False, show_tickers=True, **kwa
     :rtype: matplotlib.axes object
     """
     if plot_correlation:
-        matrix = risk_models.cov_to_corr(cov_matrix)
+        matrix = risk_utils.cov_to_corr(cov_matrix)
     else:
         matrix = cov_matrix
     fig, ax = plt.subplots()
