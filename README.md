@@ -176,8 +176,12 @@ Combine any of the previous models for more robust estimates.
 </br>
 
 ## 3.2) Portfolio Optimization (PO)
+Once the input estimates have been determined, we can proceed with the portfolio optimization process.
 
 ### 3.2.1) Portfolio Optimization Models
+The first step of the portfolio optimization is to choose the optmization model/framework. The portfolio optimization model of choice is going to determine the type of approach we want for the portfolio optimization, the different objective functions that we will be able to optimize for, and the solver used to approach the optimization problem, among other things. As we will see later on, each optimization model/framework has its particular objective functions and solvers/optimizers. 
+
+The following Portfolio Optimization Models have been/will be implemented:
 
 #### Naive PO Models
 | Model Tag              | Model Name                                               | Documentation                                                          | Code                                                                      |
@@ -199,7 +203,7 @@ Combine any of the previous models for more robust estimates.
 #### Mean-Risk PO Models
 Mean-Risk Portfolio Optimization models aim to find asset combinations which optimize the relationship return vs risk. The most well-known Mean-Risk model is Mean-Variance Portfolio Optimization, which uses the variance of asset returns as measure of risk. However, many different measures of risk can be selected, giving rise to a wide range of Mean-Risk models. 
 
-``PyFinPO`` provides direct implementation of the most relevant Mean-Risk models, as detailed in the summary table below. In order to select any other measure of risk which is not directly implemented in the PO models below, the parent class ``MeanRiskPO`` generalizes all mean-risk models and allows to choose among any of the available risk metrics (see list below).
+``PyFinPO`` provides direct implementation of the most relevant Mean-Risk models, as detailed in the summary table below (Mean-Variance, Mean-Semivariance, Mean-CVaR, Mean-CDaR). In order to select any other measure of risk which is not directly implemented in the PO models below, the parent class ``MeanRiskPO`` generalizes all mean-risk models and allows to choose among any of the available risk metrics (see list below).
 
 | Model Tag              | Model Name                                               | Documentation                                                          | Code                                                                      |
 |------------------------|--------------------------------------------------------- |------------------------------------------------------------------------|---------------------------------------------------------------------------|
@@ -253,18 +257,189 @@ Mean-Risk Portfolio Optimization models aim to find asset combinations which opt
 
 </br>
 
-# 4) Source Libraries
+### 3.2.2) Portfolio Objectives
+
+#### **Objective Functions**
+Some of the Portfolio Optimization Models exposed above are self-descriptive, in the sense that by definition they only posses a single possible objective function to optimize. In these cases, the default objective function will be automatically chosen by the code implementation, and the user will not need to specify any objective.
+
+On the other hand, there are other models (the most obvious kind being Mean-Risk models) which allow to select different objective functions to optimize for. The easiest way to picture this behavior is with Mean-Variance theory as an example (see Figure 2). Within the MVT framework we can define the Efficient Frontier, which represents a Pareto Optimal set of possible optimal portfolios. But for a given Efficient Frontier, different points can be selected as optimal under different objective functions. In this context, ``PyFinPO`` provides five main objective functions:
+- **Minimum Risk** - ``global_min_risk``
+    - Represents the point of the Optimal Set with lowest level of risk. Its calculation can be useful to have an idea of how low risk could be for a given problem/portfolio.
+- **Minimize Risk** - ``min_risk``
+    - Minimizes risk for a given level of return.
+- **Maximize Return** - ``max_return`` 
+    - Minimizes return for a given level of risk.
+- **Maximize Ratio** - ``max_ratio`` 
+    - Maximizes the ratio return-risk for the whole portfolio. This returns the tangency portfolio, as it represents the point on a returns-risk graph where the tangent to the efficient frontier intersects the y-axis at the risk-free rate. This is the default choice as it finds the optimal return per level of risk at portfolio level.
+- **Maximize Utility** - ``max_return`` 
+    - Maximizes the utility function provided manually by the user, which specifies its level of risk aversion.
+
+Once again, the word "risk" can be replaced for any of the available risk metrics defined under ``MeanRiskPO`` class (see list above).
+
+_Note: not all of these objective functions may be available for all the different Mean-Risk models._
+
+<center>
+<img src="https://github.com/robertmartin8/PyPortfolioOpt/blob/master/media/efficient_frontier_white.png?raw=true" style="width:80%;"/>
+
+Figure 2 - Mean-Variance Efficient Frontier. Source: [PyPortOpt](https://pyportfolioopt.readthedocs.io/en/latest/UserGuide.html)
+</center>
+
+</br>
+
+#### **Adding Custom Objectives**
+In addition, sometimes we may want to add extra optimization objectives that are not defined in the previous 5 objective functions.
+
+``PyFinPO`` supports the addition of extra optimization objectives. Note that there are 2 types of objectives, convex and non-convex. While convex objectives fit nicely under a convex optimization solver, non-convex objectives may be treated with care as they may produce incompatibilities with the solvers implemented in this library.
+
+- **Convex Objectives:**
+    - L2 regularisation (minimising this reduces nonzero weights)
+    - Transaction cost model (can be added also as constraint)
+    - Custom convex objectives (must be expressed with ``cvxpy`` [atomic functions](https://www.cvxpy.org/tutorial/functions/index.html))
+    
+- **Non-Convex Objectives:**
+    - See example in the original docs of the PyPortOpt library [here](https://github.com/robertmartin8/PyPortfolioOpt/blob/master/cookbook/3-Advanced-Mean-Variance-Optimisation.ipynb)
+
+
+</br>
+        
+For an example on how to implement custom objectives, see [PyFinPO-UserGuide](./notebooks/1-PyPO-UserGuide.ipynb).
+
+
+</br>
+
+#### Single-Objective vs Multi-Objective Optimization
+Note that when we provide an specific objective function or set of objectives for the portfolio optimization, it will return a single solution (i.e. single set of optimal weights that represent the optimal portfolio).
+
+Alternatively, we can change our approach and implement a multi-objective optimization where we obtain an optimal set of solutions from which we can choose the preferred one for our objectives. A way to do this, is by plotting the optimal set of solutions (e.g. efficient frontier in case of Mean-Variance Theory) and then choosing the desired portfolio.
+
+</br>
+
+### 3.2.3) Portfolio Optimization Constraints
+
+Constraints and objectives are treated similarly from an optimization point of view. Therefore, the methodology to add constraints to a portfolio optimization is almost equivalent to the process of adding objectives described above. 
+
+The main portfolio optimization constraints available in ``PyFinPO`` are:
+ 
+ - **Market Neutrality**
+
+ - **Long/Short Portfolio**
+ 
+ - **Weight Bounds** (limit the position size of securities)
+ 
+ - **Sector & Security Constraints**
+ 
+ - **Score Constraints**
+
+ - **Nº of Asset Constraints** (Convexity Constraints)
+
+ - **Tracking Error Constraints**
+
+</br>
+
+For examples on how to implement custom objectives in ``PyFinPO``, see [PyFinPO-UserGuide](./notebooks/1-PyPO-UserGuide.ipynb).
+
+ </br>
+
+### 3.2.4) Portfolio Optimization Period
+One of the main limitations of ``PyFinPO`` and most other Portfolio Optimization libraries is that the optimization is static (single-period), meaning that based on the input parameters the output optimal portfolio is only valid for a static period of time. Of course, due to the dynamic nature of financial markets it would be preferable to have a dynamic optimization in order to reflect the latest information available in the optimized portfolio and take optimal rebalancing decisions.
+
+Future development plans for PyPO include extending the optimization functionalities to address the portfolio optimization problem dynamically. Two main approaches can be found in literature that address PO dynamically, as a Multi-Period Portfolio Optimization (MPPO): 
+- The first approach considers a discretetime PO, where the expected utility of the investor terminal wealth is maximized over a multi-period investment horizon, and portfolio can be rebalanced only at discrete points in time (e.g. for a 1-year PSP, adjusting portfolio weights at the beginning of every month). 
+- The second approach is a continuous-time optimization, where asset weights can be reallocated at any time within the investment horizon. 
+
+[Zhang et. al.](https://link.springer.com/article/10.1007/s10700-017-9266-z) provide a detailed review on the formulation and advantages of dynamic PO techniques.
+
+ </br>
+
+
+### 3.2.5) Portfolio Optimization Solver (Optimizer)
+
+The solver implemented to address the optimization problem in the previous examples has been implemented under the hood of the ``MeanVariancePO`` class, which inherits its methods from the ``BaseConvexOptimizer`` class. In the context of Mean-Variance theory, as the optimization problem is typically convex (unless non-convex constraints or objectives are introduced), it can be solved via quadratic programming with the [cvxpy](https://www.cvxpy.org/) python library for convex optimization.
+
+While Mean-Variance optimization framework can be addressed with convex optimization, other portfolio optimization models which are completely different in character may use different optimization schemes. An overall summary is presented below for quick reference, including only the main portfolio optimization models and the optimization solver they use in this library. 
+
+| Portfolio Optimization Model                    | Module               | Main Class            | Optimization Solver        | Optimization Solver Details       |
+|-------------------------------------------------|----------------------|-----------------------|----------------------------|-----------------------------------|
+| Mean-Variance Portfolio Optimization            | mv_po.py             | ``MeanVariancePO``    | ``BaseConvexOptimizer``    | MVPO is addressed with convex optimization via [cvxpy](https://www.cvxpy.org/)|
+| Mean-SemiVariance Portfolio Optimization        | msv_po.py            | ``MeanSemivariancePO``| ``BaseConvexOptimizer``    | MSVPO can be re-written as convex problem ([full details here](https://pyportfolioopt.readthedocs.io/en/latest/GeneralEfficientFrontier.html#efficient-semivariance))|
+| Mean-CVaR Portfolio Optimization                | mcvar_po.py          | ``MeanCVaRPO``        | ``BaseConvexOptimizer``    | MCVaRPO can be reduced to linear program ([full details here](https://pyportfolioopt.readthedocs.io/en/latest/GeneralEfficientFrontier.html#efficient-cvar))|
+| Mean-CDaR Portfolio Optimization                | mcdar_po.py          | ``MeanCDaRPO``        | ``BaseConvexOptimizer``    | MCDaRPO can be reduced to linear program ([full details here](https://pyportfolioopt.readthedocs.io/en/latest/GeneralEfficientFrontier.html#efficientcdar))|
+| Critical Line Algorithm Portfolio Optimization  | cla_po.py            | ``CLAPO``             | ``BaseOptimizer``          | CLAPO uses [CLA convex optimization solver](https://pyportfolioopt.readthedocs.io/en/latest/OtherOptimizers.html#the-critical-line-algorithm), specifically designed for PO |
+| Hierarchical Risk Parity Portfolio Optimization | hrp_po.py            | ``HRPPO``             | ``BaseOptimizer``          | HRPPO implements hierarchical clustering optimization ([more details here](https://pyportfolioopt.readthedocs.io/en/latest/OtherOptimizers.html#hierarchical-risk-parity-hrp))|
+
+
+For a more detailed analysis on how to choose the right solver for any risk metric, visit [Riskfolio-Lib - Choosing a Solver](https://github.com/dcajasn/Riskfolio-Lib?tab=readme-ov-file#choosing-a-solver).
+
+</br>
+
+## 3.3) Portfolio Performance
+
+### 3.3.1) Portfolio Tidy Weights
+There is an option to express portfolio optimal weights in a more visual, tidy way with the ``.clean_weights()`` method (see [PyFinPO-UserGuide](./notebooks/1-PyPO-UserGuide.ipynb)).
+
+
+```python
+mv_po = po_models.MeanVariancePO(mhr, sample_cov, weight_bounds=(0,1))
+
+mv_po.min_volatility()
+optimal_portfolio_clean_weights = mv_po.clean_weights()
+optimal_portfolio_clean_weights
+```
+
+</br>
+
+### 3.3.2) Portfolio Optimization Performance
+To compute the portfolio performance (expected annual return, volatility and Sharpe Ratio) simply call the method ``.portfolio_performance()`` on the portfolio model object after having calculated the optimization objectives of choice: 
+
+```python
+from pypo.portfolio_performance import portfolio_performance
+
+mv_po = po_models.MeanVariancePO(mhr, sample_cov, weight_bounds=(0,1))
+opw = mv_po.min_volatility()
+mv_po.portfolio_performance(verbose=True)
+```
+
+</br>
+
+### 3.3.3) Portfolio Discrete Allocation
+Once we have the optimal portfolio weights, it is probably useful to express it in execution terms (how much quantity of each stock to buy at the current market price). The function ``discrete_allocation`` helps us with this purpose:
+
+```python
+from pypo.utils import DiscreteAllocation
+
+latest_prices = prices.iloc[-1]  # prices as of the day you are allocating
+da = DiscreteAllocation(optimal_portfolio_weights, latest_prices, total_portfolio_value=20000, short_ratio=0.3)
+alloc, leftover = da.lp_portfolio()
+print(f"Discrete allocation performed with ${leftover:.2f} leftover")
+{key: float(value) for key, value in alloc.items()}
+```
+Output:
+```
+Discrete allocation performed with $13.46 leftover
+{'AAPL': 3.0,
+ 'GOOG': 8.0,
+ 'META': 5.0,
+ 'MSFT': 3.0,
+ 'PFE': 218.0,
+ 'TSLA': 2.0,
+ 'UNH': 4.0,
+ 'XOM': 46.0}
+```
+
+</br>
+
+# 4) Future Works
+
+</br>
+
+# 5) Source Libraries
 - [PyPortOpt](https://github.com/robertmartin8/PyPortfolioOpt)
 - [Riskfolio-Lib](https://github.com/dcajasn/Riskfolio-Lib)
 - [skfolio](https://github.com/skfolio/skfolio)
 - [scikit-portfolio](https://github.com/scikit-portfolio/scikit-portfolio)
 - [cardiel](https://github.com/thk3421-models/cardiel)
-- []() 
-- []()
 
 </br>
-
-# 5) Future Works
 
 
 
@@ -307,10 +482,6 @@ Hyper-Parameter Tuning:
 Compatible with all sklearn methods (GridSearchCV, RandomizedSearchCV)
 
 Optimization Features:
-Minimize Risk
-Maximize Returns
-Maximize Utility
-Maximize Ratio
 Transaction Costs
 Management Fees
 L1 and L2 Regularization
