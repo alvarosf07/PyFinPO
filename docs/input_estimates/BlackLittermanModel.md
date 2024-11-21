@@ -19,16 +19,21 @@ The result is a set of blended expected returns that serve as the basis for opti
 
 ## Formulae
 1. **Equilibrium Implied Returns:**  
+   
+   <center>
+   
+   $ \pi = \lambda \Sigma w $
+   
+   </center>
 
-    $ \pi = \lambda \Sigma w $
    - $ \lambda $: Risk aversion coefficient
    - $ \Sigma $: Covariance matrix of asset returns
    - $ w $: Market capitalization weights
 
 2. **Black-Litterman Posterior Mean (μ):**
    
-   $\mu = \left( (\tau \Sigma)^{-1} + P^T \Omega^{-1} P \right)^{-1} \left( (\tau \Sigma)^{-1} \pi + P^T \Omega^{-1} q \right)
-   $
+   $\mu = \left( (\tau \Sigma)^{-1} + P^T \Omega^{-1} P \right)^{-1} \left( (\tau \Sigma)^{-1} \pi + P^T \Omega^{-1} q \right)$
+º
    - $ \tau $: Scalar indicating uncertainty in the prior (\( \pi \))
    - $ P $: Matrix encoding views (rows represent views on assets)
    - $ q $: Vector of views (expected return adjustments)

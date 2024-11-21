@@ -21,3 +21,5 @@ __all__ = [
 
 
 # TODO: add portfolio_optimization that centralizes all objective_functions in a single function
+
+# TODO: add MeanRiskPO class that centralizes all mean-risk models a single class

@@ -5,7 +5,7 @@ The classical way of addressing the PSP has been the Mean-Variance (MV) model in
 
 As consequence, many solutions have been proposed in research to improve the resolution and applicability of Portfolio Selection Problem. One of the main objectives of this library is to provide a base framework that serves as foundation on top of which we can build proprietary models that can improve the capabilities of Mean-Variance theory and related well-studied approaches to Portfolio Optimization.
 
-For a complete introduction to porftolio optimization, including the main areas of the problem and references to other publications and sources that cover each of them in more detail, please see my [article publication](https://link.springer.com/chapter/10.1007/978-3-031-74186-9_21) [10].
+For a more in-depth introduction to porftolio optimization, including the main areas of the problem and references to other publications and sources that cover each area in more detail, please see my [article publication](https://link.springer.com/chapter/10.1007/978-3-031-74186-9_21) [10].
 
 </br>
 
@@ -41,6 +41,10 @@ different approaches followed in literature to address each dimension of the PSP
 <br>
 
 # Portfolio Selection Areas
+
+<center>
+<img src="https://github.com/alvarosf07/pypot/blob/main/media/PSP_Areas.png" style="width:90%;"/>
+</center>
 
 <br>
 
