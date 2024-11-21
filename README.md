@@ -1,5 +1,5 @@
 # ``PyFinPO`` - Python Financial Portfolio Optimization
-Welcome to PyFinPO, my perfonal library for Financial Portfolio Optimization in Python.  
+Welcome to PyFinPO, my personal library for Financial Portfolio Optimization in Python.  
 
 PyFinPO is an abstraction of other Python libraries for Portfolio Optimization, aiming to provide a structured, simple and extensible infrastructure to perform Financial Portfolio Optimization.
 
@@ -49,7 +49,7 @@ Please note that PyFinPO Library is still under construction, therefore many of 
 </br>
 
 # 1) Installation
-If you would like to install ``PyFinPO``, you can just try any of the following 3 options:
+If you would like to install ``PyFinPO``, you can try any of the following 3 options:
 
  1. Clone the project and use the source code:
 
@@ -60,10 +60,10 @@ If you would like to install ``PyFinPO``, you can just try any of the following 
  2. Alternatively, you can just install the project directly from your terminal:
 
  ```bash
- pip install -e git+https://github.com/robertmartin8/PyPortfolioOpt.git
+ pip install -e git+https://github.com/alvarosf07/pypot.git
  ```
  
- 3. However, it is best practice to use a dependency manager within a virtual environment. You can import all the dependencies within ``PyFinPO`` to your local environment by cloning/downloading the project and then in the project directory just running:
+ 3. However, it is best practice to use a dependency manager within a virtual environment. You can import all the dependencies within ``PyFinPO`` to your local environment by cloning/downloading the project and then in the project directory just run:
 
  ```bash
  python setup.py install
