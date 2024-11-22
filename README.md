@@ -1,9 +1,30 @@
+
+
+</br>
+
+![](./media/imgs/PyFinPO_Logo.png)
+
+
+<!-- buttons -->
+<p align="center">
+    <a href="https://www.python.org">
+        <img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg"
+            alt="python"></a> &nbsp;
+    <a href="https://www.python.org">
+        <img src="https://img.shields.io/badge/Platforms-linux--64,win--64,osx--64-orange.svg?style=flat-square"
+            alt="platforms"></a> &nbsp;
+</p>
+
+</br>
+
 # ``PyFinPO`` - Python Financial Portfolio Optimization
+
 Welcome to PyFinPO, my personal library for Financial Portfolio Optimization in Python.  
 
 PyFinPO is an abstraction of other Python libraries for Portfolio Optimization, aiming to provide a structured, simple and extensible infrastructure to perform Financial Portfolio Optimization.
 
-### Context
+
+## Context
 When I first set out to develop a Portfolio Optimization Library in Python, my goal was simple: to gain a deep understanding of portfolio theory and its main methods. Building everything from scratch felt like the best way to learn the nuances of the different models, approaches, estimators... and their implementations.
 
 However, as I started exploring the existing Portfolio Optimization libraries in Python, I discovered that there are already VERY GOOD resources available for free ([see list below](#source-libraries)). I quickly came to the realization that it made no sense to implement my own portfolio tool from scratch having all those open-source libraries available –tested and improved through user feedback– that already included most of the Portfolio Optimization tools needed. Reinventing the wheel no longer seemed practical or efficient.
@@ -15,7 +36,7 @@ Additionally, I decided to prioritize modularity and extensibility, making extre
 In a nutshell, I defined 3 main principles for the project: unified structure, intuitive use, and scalable modularity.
 
 
-### Objectives
+## Objectives
 
 PyFinPO aims to satisfy 3 main objectives:
 
@@ -24,10 +45,9 @@ PyFinPO aims to satisfy 3 main objectives:
 3. To offer a MODULAR and EXTENSIBLE tool which anyone can use to build proprietary models and feed them into the created API structure to leverage the already implemented functionalities in existing libraries.
 
 
-### Note
-```
-Please note that PyFinPO Library is still under construction, therefore many of the functionalities have not been implemented yet. The summary tables below detail all the necessary information about the functionalities, documentation links and source code status for each model.
-```
+## Note
+> Please note that PyFinPO Library is still under construction, therefore many of the functionalities have not been implemented yet. The summary tables below detail all the necessary information about the functionalities, documentation links and source code status for each model.
+
 
 
 </br>
@@ -36,15 +56,44 @@ Please note that PyFinPO Library is still under construction, therefore many of 
 
 1) [Installation](#1-installation)
 2) [Library Structure](#2-library-structure)
-3) [Features](#3-features)
+3) [PyFinPO Features](#3-features)
     - 3.0) [Portfolio Selection Problem Overview]()
     - 3.1) [Input Estimates](#31-input-estimators)
         - 3.1.1) [Expected Return Models](#311-expected-return-models)
+            - [Historical Averages](#historical-averages)
+            - [Economic & Factor Models](#economic--factor-models)
+            - [Statistical/Machine Learning Models](#statisticalmachine-learning-models)
+            - [Hybrid Models](#hybrid-models)
         - 3.1.2) [Risk Models](#312-risk-models)
+            - [Covariance Estimators](#covariance-estimators)
+            - [Covariance Shrinkage](#covariance-shrinkage)
+            - [Sparse Inverse Covariance Estimators](#sparse-inverse-covariance-estimators)
+            - [Robust Covariance Estimators](#robust-covariance-estimators)
+
     - 3.2) [Portfolio Optimization](#32-portfolio-optimization-po)
         - 3.2.1) [Portfolio Optimization Models](#321-portfolio-optimization-models)
-4) [Source Libraries](#4-source-libraries)
-5) [Future Works](#5-future-works)
+            - [Naive PO Models](#naive-po-models)
+            - [Risk-Based PO Models](#risk-based-po-models)
+            - [Mean-Risk PO Models](#mean-risk-po-models)
+            - [Robust Mean-Risk Models](#robust-mean-risk-po-models)
+            - [Clustering PO Models](#clustering-po-models)
+            - [Ensemble PO Models](#ensemble-po-models)
+        - 3.2.2) [Portfolio Optimization Objectives](#322-portfolio-optimization-objectives)
+            - [Objective Functions](#objective-functions)
+            - [Adding Custom Objectives](#adding-custom-objectives)
+            - [Sinlge-Objective vs Multi-Objective Optimization]()
+        - 3.2.3) [Portfolio Optimization Constraints](#323-portfolio-optimization-constraints)
+        - 3.2.4) [Portfolio Optimization Period](#324-portfolio-optimization-period)
+        - 3.2.5) [Portfolio Optimization Solver (Optimizer)](#325-portfolio-optimization-solver-optimizer)
+
+    - 3.3) [Portfolio Performance](#33-portfolio-performance)
+        - 3.3.1) [Portfolio Tidy Weights](#331-portfolio-tidy-weights)
+        - 3.3.2) [Portfolio Optimization Performance](#332-portfolio-optimization-performance)
+        - 3.3.3) [Portfolio Discrete Allocation](#333-portfolio-discrete-allocation)
+        
+4) [Future Works](#4-future-works)
+5) [Source Libraries](#5-source-libraries)
+
 
 </br>
 
@@ -69,11 +118,37 @@ If you would like to install ``PyFinPO``, you can try any of the following 3 opt
  python setup.py install
  ```
 
+ </br>
+
 # 2) Library Structure
+ - ``config`` - library configuration files
+ - ``data`` - stores datasets of raw, processed or forecasted asset prices/returns
+ - ``docs`` - documentation for the different models and functions/classes of the library
+ - ``media`` - images, files other media content used in the library
+ - ``pyfinpo`` - library source code. See [Features](#3-features) section for full details.
+ - ``scripts`` - python scripts with diverse contents and applications
+ - ``tests``- test implementations of all the different functionalities of the library
+ - ``tutorials`` - tutorials and practical use cases of implementations with PyFinPO
 
-# 3) Features
 
-## 3.0) Portfolio Selection Problem Overview
+</br>
+
+
+# 3) ``PyFinPO`` Features
+
+## 3.0) Overview of Portfolio Selection Problem
+
+Portfolio optimization, as formalized by Harry Markowitz in his seminal 1952 paper "Portfolio Selection," revolutionized investment theory by introducing a systematic and quantitative framework. Markowitz demonstrated that by combining assets with differing expected returns and volatilities, investors can construct portfolios that either minimize risk for a given return or maximize return for a specific level of risk. These optimal portfolios form the efficient frontier, a cornerstone of what is now known as Modern Portfolio Theory (MPT).
+
+At the heart of Markowitz’s framework is mean-variance optimization, which requires two key inputs: estimates of expected returns and a covariance matrix to capture asset interdependencies. While the model provides a theoretically optimal solution, its practical application is limited by the difficulty in accurately forecasting these inputs. Historical data is often used as a proxy, though this approach sacrifices the theoretical guarantees of precision.
+
+Advancements in portfolio optimization have expanded upon these ideas, introducing diverse objective functions and measures of risk such as maximizing Sharpe ratios or minimizing Conditional Value at Risk (CVaR). Constraints such as budget limits, sector exposure, or regulatory requirements are incorporated to reflect real-world considerations.
+
+Therefore, we can divide portfolio optimization process in 4 main steps, each with their own sub-steps. These steps are explained in the Figure below, and fully detailed in the following section.
+
+![](./media/imgs/Portfolio_Optimization.png)
+
+</br>
 
 ## 3.1) Input Estimators
 
@@ -257,12 +332,24 @@ Mean-Risk Portfolio Optimization models aim to find asset combinations which opt
 
 </br>
 
-### 3.2.2) Portfolio Objectives
+### 3.2.2) Portfolio Optimization Objectives
+
+</br>
+
+<center>
+<img src="https://github.com/robertmartin8/PyPortfolioOpt/blob/master/media/efficient_frontier_white.png?raw=true" style="width:80%;"/>
+
+Figure 2 - Mean-Variance Efficient Frontier. Source: [PyPortOpt](https://pyportfolioopt.readthedocs.io/en/latest/UserGuide.html)
+</center>
+
+</br>
 
 #### **Objective Functions**
 Some of the Portfolio Optimization Models exposed above are self-descriptive, in the sense that by definition they only posses a single possible objective function to optimize. In these cases, the default objective function will be automatically chosen by the code implementation, and the user will not need to specify any objective.
 
-On the other hand, there are other models (the most obvious kind being Mean-Risk models) which allow to select different objective functions to optimize for. The easiest way to picture this behavior is with Mean-Variance theory as an example (see Figure 2). Within the MVT framework we can define the Efficient Frontier, which represents a Pareto Optimal set of possible optimal portfolios. But for a given Efficient Frontier, different points can be selected as optimal under different objective functions. In this context, ``PyFinPO`` provides five main objective functions:
+However, there are other models (the most obvious kind being Mean-Risk models) which allow to select different objective functions to optimize for. The easiest way to picture this behavior is with Mean-Variance theory as an example (see Figure 2). Within the MVT framework we can define the Efficient Frontier, which represents a Pareto Optimal set of possible optimal portfolios.For a given Efficient Frontier, different points can be selected as optimal under different objective functions. 
+
+In this context, ``PyFinPO`` provides five main objective functions:
 - **Minimum Risk** - ``global_min_risk``
     - Represents the point of the Optimal Set with lowest level of risk. Its calculation can be useful to have an idea of how low risk could be for a given problem/portfolio.
 - **Minimize Risk** - ``min_risk``
@@ -276,13 +363,7 @@ On the other hand, there are other models (the most obvious kind being Mean-Risk
 
 Once again, the word "risk" can be replaced for any of the available risk metrics defined under ``MeanRiskPO`` class (see list above).
 
-_Note: not all of these objective functions may be available for all the different Mean-Risk models._
-
-<center>
-<img src="https://github.com/robertmartin8/PyPortfolioOpt/blob/master/media/efficient_frontier_white.png?raw=true" style="width:80%;"/>
-
-Figure 2 - Mean-Variance Efficient Frontier. Source: [PyPortOpt](https://pyportfolioopt.readthedocs.io/en/latest/UserGuide.html)
-</center>
+> _Note: not all of these objective functions may be available for all the different Mean-Risk models._
 
 </br>
 
@@ -302,7 +383,7 @@ In addition, sometimes we may want to add extra optimization objectives that are
 
 </br>
         
-For an example on how to implement custom objectives, see [PyFinPO-UserGuide](./notebooks/1-PyPO-UserGuide.ipynb).
+> For an example on how to implement custom objectives, see [PyFinPO-UserGuide](./notebooks/1-PyPO-UserGuide.ipynb).
 
 
 </br>
@@ -336,7 +417,7 @@ The main portfolio optimization constraints available in ``PyFinPO`` are:
 
 </br>
 
-For examples on how to implement custom objectives in ``PyFinPO``, see [PyFinPO-UserGuide](./notebooks/1-PyPO-UserGuide.ipynb).
+> For examples on how to implement custom objectives in ``PyFinPO``, see [PyFinPO-UserGuide](./notebooks/1-PyPO-UserGuide.ipynb).
 
  </br>
 
@@ -368,7 +449,7 @@ While Mean-Variance optimization framework can be addressed with convex optimiza
 | Hierarchical Risk Parity Portfolio Optimization | hrp_po.py            | ``HRPPO``             | ``BaseOptimizer``          | HRPPO implements hierarchical clustering optimization ([more details here](https://pyportfolioopt.readthedocs.io/en/latest/OtherOptimizers.html#hierarchical-risk-parity-hrp))|
 
 
-For a more detailed analysis on how to choose the right solver for any risk metric, visit [Riskfolio-Lib - Choosing a Solver](https://github.com/dcajasn/Riskfolio-Lib?tab=readme-ov-file#choosing-a-solver).
+> For a more detailed analysis on how to choose the right solver for any risk metric, visit [Riskfolio-Lib - Choosing a Solver](https://github.com/dcajasn/Riskfolio-Lib?tab=readme-ov-file#choosing-a-solver).
 
 </br>
 
