@@ -19,9 +19,9 @@ import pandas as pd
 import scipy.cluster.hierarchy as sch
 import scipy.spatial.distance as ssd
 
-from pypo.portfolio_optimization.po_optimizers import base_optimizer
-from pypo.input_estimates import risk_models
-from pypo.portfolio_performance import portfolio_performance
+from pyfinpo.portfolio_optimization.po_optimizers import base_optimizer
+from pyfinpo.input_estimates import risk_models
+from pyfinpo.portfolio_performance import portfolio_performance
 
 class HRPPO(base_optimizer.BaseOptimizer):
     """

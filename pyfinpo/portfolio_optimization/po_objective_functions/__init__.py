@@ -2,7 +2,7 @@
 
 """
 
-# Import all return models
+# Import all objective functions
 from .objective_functions import portfolio_variance
 from .objective_functions import portfolio_return
 from .objective_functions import sharpe_ratio

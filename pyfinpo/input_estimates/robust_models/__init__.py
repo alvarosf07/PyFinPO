@@ -8,7 +8,7 @@ the robustness and predictive performance of return and risk models.
 
 """
 
-# Import all return models
+# Import all robust models
 from .black_litterman_rm import (
     BlackLittermanModel,
     market_implied_prior_returns,

@@ -1,5 +1,5 @@
 """
-The module pypo.utils.optimization_utils provides utility functions to support the module 'po_optimizers'.
+The module pyfinpo.utils.optimization_utils provides utility functions to support the module 'po_optimizers'.
 """
 
 from collections.abc import Iterable

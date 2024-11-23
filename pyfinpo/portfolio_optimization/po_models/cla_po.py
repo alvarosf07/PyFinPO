@@ -7,8 +7,8 @@ by Marcos Lopez de Prado and David Bailey.
 import numpy as np
 import pandas as pd
 
-from pypo.portfolio_optimization.po_optimizers import base_optimizer
-from pypo.portfolio_performance import portfolio_performance
+from pyfinpo.portfolio_optimization.po_optimizers import base_optimizer
+from pyfinpo.portfolio_performance import portfolio_performance
 
 
 class CLAPO(base_optimizer.BaseOptimizer):

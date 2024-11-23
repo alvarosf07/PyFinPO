@@ -15,9 +15,9 @@ import numpy as np
 import scipy.cluster.hierarchy as sch
 
 
-from pypo.input_estimates import risk_models
-from pypo.portfolio_optimization.po_models import MeanVariancePO, CLAPO
-from pypo.utils import exceptions, risk_utils
+from pyfinpo.input_estimates import risk_models
+from pyfinpo.portfolio_optimization.po_models import MeanVariancePO, CLAPO
+from pyfinpo.utils import exceptions, risk_utils
 
 try:
     plt.style.use("seaborn-v0_8-deep")

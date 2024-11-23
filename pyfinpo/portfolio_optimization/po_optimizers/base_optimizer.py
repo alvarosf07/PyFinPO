@@ -16,8 +16,8 @@ import numpy as np
 import pandas as pd
 import scipy.optimize as sco
 
-from pypo.utils import exceptions
-from pypo.portfolio_optimization.po_objective_functions import objective_functions
+from pyfinpo.utils import exceptions
+from pyfinpo.portfolio_optimization.po_objective_functions import objective_functions
 
 
 class BaseOptimizer:

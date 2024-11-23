@@ -21,7 +21,7 @@
 
 Welcome to PyFinPO, my personal library for Financial Portfolio Optimization in Python.  
 
-PyFinPO is an abstraction of other Python libraries for Portfolio Optimization, aiming to provide a structured, simple and extensible infrastructure to perform Financial Portfolio Optimization.
+PyFinPO is an abstraction of other Python libraries for Portfolio Optimization ([scikit-learn](https://scikit-learn.org/), [cvxpy](https://www.cvxpy.org/), [PyPortOpt](https://github.com/robertmartin8/PyPortfolioOpt), [skfolio](https://github.com/skfolio/skfolio)...), aiming to provide a structured, simple and extensible infrastructure to perform Financial Portfolio Optimization.
 
 
 ## Context
@@ -103,16 +103,16 @@ If you would like to install ``PyFinPO``, you can try any of the following 3 opt
  1. Clone the project and use the source code:
 
  ```bash
- git clone https://github.com/alvarosf07/pypot
+ git clone https://github.com/alvarosf07/pyfinpo
  ```
 
  2. Alternatively, you can just install the project directly from your terminal:
 
  ```bash
- pip install -e git+https://github.com/alvarosf07/pypot.git
+ pip install -e git+https://github.com/alvarosf07/pyfinpo.git
  ```
  
- 3. However, it is best practice to use a dependency manager within a virtual environment. You can import all the dependencies within ``PyFinPO`` to your local environment by cloning/downloading the project and then in the project directory just run:
+ 3. However, it is best practice to use a dependency manager within a virtual environment. You can import all the dependencies within ``PyFinPO`` to your local environment by cloning/downloading the project and then in the project directory just can just run:
 
  ```bash
  python setup.py install
@@ -144,7 +144,7 @@ At the heart of Markowitz’s framework is mean-variance optimization, which req
 
 Advancements in portfolio optimization have expanded upon these ideas, introducing diverse objective functions and measures of risk such as maximizing Sharpe ratios or minimizing Conditional Value at Risk (CVaR). Constraints such as budget limits, sector exposure, or regulatory requirements are incorporated to reflect real-world considerations.
 
-Therefore, we can divide portfolio optimization process in 4 main steps, each with their own sub-steps. These steps are explained in the Figure below, and fully detailed in the following section.
+Therefore, we can divide portfolio optimization process in 4 main steps, each with their own sub-steps. These depicted in the Figure below, and fully detailed in the following section.
 
 ![](./media/imgs/Portfolio_Optimization.png)
 
@@ -157,8 +157,8 @@ Therefore, we can divide portfolio optimization process in 4 main steps, each wi
 #### Historical Averages
 | Model Tag         | Model Name                                           | Documentation                                                               | Implementation                                                                  |
 |-------------------|----------------------------------------------------- |---------------------------------------------------------------------------- |---------------------------------------------------------------------  |
-| ``mh_rm``         | Mean Historical Return Model  (aka Empirical Returns)                       | [PyPortOpt](https://pyportfolioopt.readthedocs.io/en/latest/ExpectedReturns.html#pypfopt.expected_returns.mean_historical_return)  | [mh_rm.py](./pyfpo/input_estimates/expected_return_models/mh_rm.py)   |
-| ``ewmh_rm``       | Exponentially Weighted Mean Return Model             | [PyPortOpt](https://pyportfolioopt.readthedocs.io/en/latest/ExpectedReturns.html#pypfopt.expected_returns.ema_historical_return)   | [ewmh_rm.py](./pyfpo/input_estimates/expected_return_models/ewmh_rm.py)  |
+| ``mh_rm``         | Mean Historical Return Model  (aka Empirical Returns)                       | [PyPortOpt](https://pyportfolioopt.readthedocs.io/en/latest/ExpectedReturns.html#pypfopt.expected_returns.mean_historical_return)  | [mh_rm.py](./pyfinpo/input_estimates/expected_return_models/mh_rm.py)   |
+| ``ewmh_rm``       | Exponentially Weighted Mean Return Model             | [PyPortOpt](https://pyportfolioopt.readthedocs.io/en/latest/ExpectedReturns.html#pypfopt.expected_returns.ema_historical_return)   | [ewmh_rm.py](./pyfinpo/input_estimates/expected_return_models/ewmh_rm.py)  |
 | ``mceq_rm``       | Market Cap Equilibrium Expected Return Model             | [skfolio](https://skfolio.org/generated/skfolio.moments.EquilibriumMu.html)   | *To be implemented*  |
 | ``eqweq_rm``       | Equal Weight Equilibrium Expected Return Model             | [skfolio](https://skfolio.org/generated/skfolio.moments.EquilibriumMu.html)   | *To be implemented*  |
 
@@ -166,7 +166,7 @@ Therefore, we can divide portfolio optimization process in 4 main steps, each wi
 #### Economic & Factor Models
 | Model Tag         | Model Name                                               | Documentation                                                               | Implementation                                                                  |
 |-------------------|--------------------------------------------------------- |---------------------------------------------------------------------------- |---------------------------------------------------------------------  |
-| ``capm_rm``       | Capital Asset Pricing Return Model (Equilibrium)         | [PyPortOpt](https://pyportfolioopt.readthedocs.io/en/latest/ExpectedReturns.html#pypfopt.expected_returns.capm_return)   | [capm_rm.py](./pyfpo/input_estimates/expected_return_models/capm_rm.py) |
+| ``capm_rm``       | Capital Asset Pricing Return Model (Equilibrium)         | [PyPortOpt](https://pyportfolioopt.readthedocs.io/en/latest/ExpectedReturns.html#pypfopt.expected_returns.capm_return)   | [capm_rm.py](./pyfinpo/input_estimates/expected_return_models/capm_rm.py) |
 | ``apt_rm``        | Arbitrage Pricing Theory (APT) Return Model              | [See docs](https://www.fe.training/free-resources/portfolio-management/arbitrage-pricing-theory/)   | _To be implemented_ |
 | ``fama_factor_rm``| Fama-French Three-Factor Return Model                    | [See docs](https://en.wikipedia.org/wiki/Fama%E2%80%93French_three-factor_model)   | _To be implemented_ |
 | ``multi_factor_rm``| Multi-Factor Return Models        | [skfolio](https://skfolio.org/auto_examples/1_mean_risk/plot_13_factor_model.html#factor-model)   | _To be implemented_ | 
@@ -247,6 +247,18 @@ Combine any of the previous models for more robust estimates.
 |------------------------|--------------------------------------------------------- |------------------------------------------------------------------------|---------------------------------------------------------------------------|
 | ``mcd_cov``            | Robust Minimum Covariance Determinant (MCD) Estimator    | [Scikit-learn](https://scikit-learn.org/1.5/modules/covariance.html#robust-covariance-estimation)                | _To be implemented_             |
 | ``gerber_cov``         | Robust Gerber Statistic for Covariance Estimation        | [The Gerber Statistic](https://portfoliooptimizer.io/blog/the-gerber-statistic-a-robust-co-movement-measure-for-correlation-matrix-estimation/)    | _To be implemented_ |
+
+</br>
+
+##### Quick Example
+```python
+from pyfinpo.input_estimates import risk_models
+
+cov_matrix = risk_models.sample_cov(prices)
+po_plotting.plot_covariance(sample_cov, plot_correlation=True)
+plt.show()
+```
+<img src="./media/imgs/CorrelationMatrix.png" style="width:80%;">
 
 </br>
 
@@ -383,7 +395,7 @@ In addition, sometimes we may want to add extra optimization objectives that are
 
 </br>
         
-> For an example on how to implement custom objectives, see [PyFinPO-UserGuide](./notebooks/1-PyPO-UserGuide.ipynb).
+> For an example on how to implement custom objectives, see [PyFinPO-UserGuide](./tutorials/Tutorial%201%20-%20PyFinPO%20User%20Guide.ipynb).
 
 
 </br>
@@ -417,14 +429,14 @@ The main portfolio optimization constraints available in ``PyFinPO`` are:
 
 </br>
 
-> For examples on how to implement custom objectives in ``PyFinPO``, see [PyFinPO-UserGuide](./notebooks/1-PyPO-UserGuide.ipynb).
+> For examples on how to implement custom objectives in ``PyFinPO``, see [PyFinPO-UserGuide](./tutorials/Tutorial%201%20-%20PyFinPO%20User%20Guide.ipynb).
 
  </br>
 
 ### 3.2.4) Portfolio Optimization Period
 One of the main limitations of ``PyFinPO`` and most other Portfolio Optimization libraries is that the optimization is static (single-period), meaning that based on the input parameters the output optimal portfolio is only valid for a static period of time. Of course, due to the dynamic nature of financial markets it would be preferable to have a dynamic optimization in order to reflect the latest information available in the optimized portfolio and take optimal rebalancing decisions.
 
-Future development plans for PyPO include extending the optimization functionalities to address the portfolio optimization problem dynamically. Two main approaches can be found in literature that address PO dynamically, as a Multi-Period Portfolio Optimization (MPPO): 
+Future development plans for PyFinPO include extending the optimization functionalities to address the portfolio optimization problem dynamically. Two main approaches can be found in literature that address PO dynamically, as a Multi-Period Portfolio Optimization (MPPO): 
 - The first approach considers a discretetime PO, where the expected utility of the investor terminal wealth is maximized over a multi-period investment horizon, and portfolio can be rebalanced only at discrete points in time (e.g. for a 1-year PSP, adjusting portfolio weights at the beginning of every month). 
 - The second approach is a continuous-time optimization, where asset weights can be reallocated at any time within the investment horizon. 
 
@@ -454,9 +466,22 @@ While Mean-Variance optimization framework can be addressed with convex optimiza
 </br>
 
 ## 3.3) Portfolio Performance
+To compute the portfolio performance (expected annual return, volatility and Sharpe Ratio) simply call the method ``.portfolio_performance()`` on the portfolio model object after having calculated the optimization objectives of choice: 
 
-### 3.3.1) Portfolio Tidy Weights
-There is an option to express portfolio optimal weights in a more visual, tidy way with the ``.clean_weights()`` method (see [PyFinPO-UserGuide](./notebooks/1-PyPO-UserGuide.ipynb)).
+```python
+from pyfinpo.portfolio_performance import portfolio_performance
+
+mv_po = po_models.MeanVariancePO(mhr, sample_cov, weight_bounds=(0,1))
+opw = mv_po.min_volatility()
+mv_po.portfolio_performance(verbose=True)
+```
+
+</br>
+
+## 3.4) Portfolio Optimization Post-Processing
+
+### 3.4.1) Portfolio Tidy Weights
+There is an option to express portfolio optimal weights in a more visual, tidy way with the ``.clean_weights()`` method (see [PyFinPO-UserGuide](./tutorials/Tutorial%201%20-%20PyFinPO%20User%20Guide.ipynb)).
 
 
 ```python
@@ -467,26 +492,23 @@ optimal_portfolio_clean_weights = mv_po.clean_weights()
 optimal_portfolio_clean_weights
 ```
 
-</br>
-
-### 3.3.2) Portfolio Optimization Performance
-To compute the portfolio performance (expected annual return, volatility and Sharpe Ratio) simply call the method ``.portfolio_performance()`` on the portfolio model object after having calculated the optimization objectives of choice: 
-
 ```python
-from pypo.portfolio_performance import portfolio_performance
-
-mv_po = po_models.MeanVariancePO(mhr, sample_cov, weight_bounds=(0,1))
-opw = mv_po.min_volatility()
-mv_po.portfolio_performance(verbose=True)
+pd.Series(mv_po).plot.pie(figsize=(7,7), colors=colors, autopct='%1.1f%%', pctdistance=0.85)
 ```
+<center>
+<img src="./media/imgs/PortfolioPieChart.png" style="width:80%;">
+
+</center>
+
 
 </br>
 
-### 3.3.3) Portfolio Discrete Allocation
+
+### 3.4.2) Portfolio Discrete Allocation
 Once we have the optimal portfolio weights, it is probably useful to express it in execution terms (how much quantity of each stock to buy at the current market price). The function ``discrete_allocation`` helps us with this purpose:
 
 ```python
-from pypo.utils import DiscreteAllocation
+from pyfinpo.utils import DiscreteAllocation
 
 latest_prices = prices.iloc[-1]  # prices as of the day you are allocating
 da = DiscreteAllocation(optimal_portfolio_weights, latest_prices, total_portfolio_value=20000, short_ratio=0.3)
@@ -510,14 +532,25 @@ Discrete allocation performed with $13.46 leftover
 </br>
 
 # 4) Future Works
+Some of the improvements that may be added in future versions of ``PyFinPO`` include the following:
+- Develop detailed documentation for models and API usage under ``docs`` folder.
+- Finish implementation of all the return models, risk models and portfolio optimization models whose status appears as "_To be implemented_" in the summary tables described above.
+- Include the implementation of multi-period optimization. See more details in [Section 3.2.4](#324-portfolio-optimization-period).
+- Improve Portfolio Performance function to depict a more detailed analysis about the optimized portfolio, including additional measures of risk, performance ratios, backtesting functionalities, sensitivity analysis...
+- Implement tests for all library functionalities under the folder ``tests``.
+- Add additional tutorials under the folder ``tutorials`` (currently only 2 are available) to cover more practical use cases of different optimizations and functionalities that can be performed with ``PyFinPO``.
 
 </br>
 
-# 5) Source Libraries
+# 5) Source Libraries 
+``PyFinPO`` is an abstraction built on top of the following Python libraries:
+- [scikit-learn](https://scikit-learn.org/)
+- [cvxpy](https://www.cvxpy.org/)
 - [PyPortOpt](https://github.com/robertmartin8/PyPortfolioOpt)
-- [Riskfolio-Lib](https://github.com/dcajasn/Riskfolio-Lib)
 - [skfolio](https://github.com/skfolio/skfolio)
+- [Riskfolio-Lib](https://github.com/dcajasn/Riskfolio-Lib)
 - [scikit-portfolio](https://github.com/scikit-portfolio/scikit-portfolio)
+- [mlfinlab](https://random-docs.readthedocs.io/en/latest/index.html)
 - [cardiel](https://github.com/thk3421-models/cardiel)
 
 </br>

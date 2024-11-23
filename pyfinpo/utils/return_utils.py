@@ -1,5 +1,5 @@
 """
-The module pypo.utils.returns provides utility functions to convert from returns to prices and vice-versa.
+The module pyfinpo.utils.returns provides utility functions to convert from returns to prices and vice-versa.
 """
 
 import warnings

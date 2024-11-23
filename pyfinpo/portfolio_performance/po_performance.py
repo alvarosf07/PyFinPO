@@ -6,7 +6,7 @@ evaluate return and risk for a given set of portfolio weights.
 import numpy as np
 import pandas as pd
 
-from pypo.portfolio_optimization.po_objective_functions import objective_functions
+from pyfinpo.portfolio_optimization.po_objective_functions import objective_functions
 
 
 def portfolio_performance(

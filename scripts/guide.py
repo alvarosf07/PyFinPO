@@ -8,12 +8,12 @@ import yfinance as yf
 #from pypfopt import risk_models
 #from pypfopt import expected_returns
 
-sys.path.append('/Users/alvarosanchez/Documents/Projects/personal-projects/pypot')
-from pypo.input_estimates import expected_return_models
-from pypo.input_estimates import risk_models
-from pypo.input_estimates.robust_models import black_litterman_rm, BlackLittermanModel
-from pypo.portfolio_optimization import po_models
-from pypo.utils import DiscreteAllocation, get_latest_prices
+sys.path.append('/Users/alvarosanchez/Documents/Projects/personal-projects/pyfinpo')
+from pyfinpo.input_estimates import expected_return_models
+from pyfinpo.input_estimates import risk_models
+from pyfinpo.input_estimates.robust_models import black_litterman_rm, BlackLittermanModel
+from pyfinpo.portfolio_optimization import po_models
+from pyfinpo.utils import DiscreteAllocation, get_latest_prices
 
 #df = pd.read_csv("data/raw/stock_prices_test.csv")
 

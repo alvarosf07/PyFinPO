@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "pypot"
+name = "pyfinpo"
 version = "0.1.0"
 description = "Personal library to implement portfolio optimization methods in python"
 license = "None"
 authors = ["Alvaro Sanchez <alvarosf07@gmail.com>"]
 readme = "README.md"
-repository = "https://github.com/alvarosf07/pypot"
-documentation = "https://github.com/alvarosf07/pypot"
+repository = "https://github.com/alvarosf07/pyfinpo"
+documentation = "https://github.com/alvarosf07/pyfinpo"
 keywords= ["finance", "portfolio", "optimization", "quant", "investing"]
 classifiers=[
         "Development Status :: 0 - Beta",
@@ -25,10 +25,10 @@ classifiers=[
         "Topic :: Office/Business :: Financial",
         "Topic :: Office/Business :: Financial :: Investment",
     ]
-packages = [ {include = "pypot"} ]
+packages = [ {include = "pyfinpo"} ]
 
 [tool.poetry.urls]
-"Issues" = "https://github.com/alvarosf07/pypot/issues"
+"Issues" = "https://github.com/alvarosf07/pyfinpo/issues"
 "Personal website" = "https://https://github.com/alvarosf07"
 
 

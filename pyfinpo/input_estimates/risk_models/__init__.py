@@ -21,7 +21,7 @@ The format of the data input is the same as that in :ref:`expected-returns`.
 - covariance to correlation matrix
 """
 
-# Import all return models
+# Import all risk models
 from .sample_cov import sample_cov
 from .semi_cov import semi_cov
 from .ew_cov import ew_cov

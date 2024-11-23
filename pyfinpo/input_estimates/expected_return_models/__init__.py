@@ -17,7 +17,7 @@ Currently implemented:
     - exponentially weighted mean historical return
     - CAPM estimate of returns
 
-Additionally, we provide utility functions to convert from returns to prices and vice-versa (located under pypo.utils.returns.py)
+Additionally, we provide utility functions to convert from returns to prices and vice-versa (located under pyfinpo.utils.returns.py)
 """
 
 # Import all return models

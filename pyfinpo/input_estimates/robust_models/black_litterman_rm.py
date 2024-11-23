@@ -12,8 +12,8 @@ import warnings
 import numpy as np
 import pandas as pd
 
-from pypo.portfolio_optimization.po_optimizers import BaseOptimizer
-from pypo.portfolio_performance import portfolio_performance
+from pyfinpo.portfolio_optimization.po_optimizers import BaseOptimizer
+from pyfinpo.portfolio_performance import portfolio_performance
 
 
 def market_implied_prior_returns(

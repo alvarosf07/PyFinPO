@@ -1,5 +1,5 @@
 """
-The module pypo.utils.risk_utils provides utility functions to support operations related with risk models.
+The module pyfinpo.utils.risk_utils provides utility functions to support operations related with risk models.
 """
 
 import warnings

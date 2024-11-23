@@ -8,8 +8,8 @@ import warnings
 import cvxpy as cp
 import numpy as np
 
-from pypo.portfolio_optimization.po_models.mv_po import MeanVariancePO
-from pypo.portfolio_optimization import po_objective_functions
+from pyfinpo.portfolio_optimization.po_models.mv_po import MeanVariancePO
+from pyfinpo.portfolio_optimization import po_objective_functions
 
 
 class MeanCDaRPO(MeanVariancePO):

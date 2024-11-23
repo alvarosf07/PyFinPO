@@ -2,7 +2,7 @@ import warnings
 
 import pandas as pd
 
-from pypo.utils.return_utils import _check_returns, returns_from_prices, prices_from_returns
+from pyfinpo.utils.return_utils import _check_returns, returns_from_prices, prices_from_returns
 
 
 def ewmh_rm(

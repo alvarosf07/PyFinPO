@@ -8,10 +8,10 @@ import cvxpy as cp
 import numpy as np
 import pandas as pd
 
-from pypo.portfolio_optimization import po_objective_functions
-from pypo.portfolio_optimization.po_optimizers import BaseConvexOptimizer
-from pypo.portfolio_performance import portfolio_performance
-from pypo.utils import exceptions
+from pyfinpo.portfolio_optimization import po_objective_functions
+from pyfinpo.portfolio_optimization.po_optimizers import BaseConvexOptimizer
+from pyfinpo.portfolio_performance import portfolio_performance
+from pyfinpo.utils import exceptions
 
 # Equivalent to the EfficientFrontier class in PyPortOpt library
 class MeanVariancePO(BaseConvexOptimizer):

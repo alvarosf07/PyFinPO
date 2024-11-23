@@ -8,14 +8,14 @@ with open("README.md", "r") as f:
 
 if __name__ == "__main__":
     setuptools.setup(
-        name = "pypot",
+        name = "pyfinpo",
         version = "0.1.0",
-        description = "Personal library to implement portfolio optimization methods in python",
+        description = "Personal library for Financial Portfolio Optimization in Python",
         license = "None",
         authors = ["Alvaro Sanchez <alvarosf07@gmail.com>"],
         readme = "README.md",
-        repository = "https://github.com/alvarosf07/pypot",
-        documentation = "https://github.com/alvarosf07/pypot",
+        repository = "https://github.com/alvarosf07/pyfinpo",
+        documentation = "https://github.com/alvarosf07/pyfinpo",
         keywords= ["finance", "portfolio", "optimization", "quant", "investing"],
         classifiers=[
                 "Development Status :: 0 - Beta",
@@ -47,8 +47,8 @@ if __name__ == "__main__":
         tests_require=["pytest"],
         python_requires=">=3.8",
         project_urls={
-            "Documentation": "https://github.com/alvarosf07/pypot",
-            "Issues": "https://github.com/alvarosf07/pypot/issues",
+            "Documentation": "https://github.com/alvarosf07/pyfinpo",
+            "Issues": "https://github.com/alvarosf07/pyfinpo/issues",
             "Personal website": "https://github.com/alvarosf07",
         },
     )
