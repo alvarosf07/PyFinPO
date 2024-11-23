@@ -21,7 +21,7 @@
 
 Welcome to PyFinPO, my personal library for Financial Portfolio Optimization in Python.  
 
-PyFinPO is an abstraction of other Python libraries for Portfolio Optimization ([scikit-learn](https://scikit-learn.org/), [cvxpy](https://www.cvxpy.org/), [PyPortOpt](https://github.com/robertmartin8/PyPortfolioOpt), [skfolio](https://github.com/skfolio/skfolio)...), aiming to provide a structured, simple and extensible infrastructure to perform Financial Portfolio Optimization.
+PyFinPO is an abstraction of other Python libraries for Portfolio Optimization ([PyPortOpt](https://github.com/robertmartin8/PyPortfolioOpt), [skfolio](https://github.com/skfolio/skfolio), [scikit-learn](https://scikit-learn.org/), [cvxpy](https://www.cvxpy.org/)...), aiming to provide a structured, simple and extensible infrastructure to perform Financial Portfolio Optimization.
 
 
 ## Context
