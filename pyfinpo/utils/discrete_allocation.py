@@ -8,7 +8,7 @@ import cvxpy as cp
 import numpy as np
 import pandas as pd
 
-from pyfinpo.utils import exceptions
+from ..utils import exceptions
 
 
 def get_latest_prices(prices):

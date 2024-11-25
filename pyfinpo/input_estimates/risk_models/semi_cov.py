@@ -3,8 +3,8 @@ import warnings
 import numpy as np
 import pandas as pd
 
-from pyfinpo.utils.return_utils import returns_from_prices
-from pyfinpo.utils.risk_utils import fix_nonpositive_semidefinite
+from ...utils.return_utils import returns_from_prices
+from ...utils.risk_utils import fix_nonpositive_semidefinite
 
 
 def semi_cov(

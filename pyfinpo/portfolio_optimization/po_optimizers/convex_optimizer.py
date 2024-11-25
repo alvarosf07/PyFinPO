@@ -10,9 +10,9 @@ import numpy as np
 import scipy.optimize as sco
 import cvxpy as cp
 
-from pyfinpo.portfolio_optimization.po_optimizers import BaseOptimizer
-from pyfinpo.utils import exceptions
-from pyfinpo.utils.optimization_utils import _get_all_args
+from ...portfolio_optimization.po_optimizers import BaseOptimizer
+from ...utils import exceptions
+from ...utils.optimization_utils import _get_all_args
 
 class BaseConvexOptimizer(BaseOptimizer):
 
