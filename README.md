@@ -175,10 +175,10 @@ Therefore, we can divide portfolio optimization process in 4 main steps, each wi
 
 
 #### Statistical/Machine Learning Models
-- **Shrinkage Estimators** -> The estimator shrinks the sample mean toward a target vector:
+- **Shrinkage Estimators** -> The estimator shrinks the sample mean toward a target vector.
+- **Regression-Based Return Models** -> Predict future returns using historical and fundamental data
 - **Bayesian Models** -> Model relationships between variables and incorporate new information/views to estimate probabilistic returns.
 - **Time-Series Forecasting Return Models**
-- **Regression-Based Return Models** -> Predict future returns using historical and fundamental data
 - **Supervised ML Models** -> Support Vector Machines, Gradient Boosting, Random Forests...
 - **Neural Networks** -> Capture non-linear relationships and patterns, suitable for complex datasets.
 
@@ -192,7 +192,7 @@ Therefore, we can divide portfolio optimization process in 4 main steps, each wi
 | ``shrinkage_rm.bayes_stein``  | Shrinkage Return Models - Bayes-Stein        | [skfolio - Expected Return Shrinkage](https://skfolio.org/generated/skfolio.moments.ShrunkMu.html#skfolio.moments.ShrunkMu)  | _To be implemented_ |
 | ``shrinkage_rm.bop``  | Shrinkage Return Models - Bodnar Okhrin Parolya      | [skfolio - Expected Return Shrinkage](https://skfolio.org/generated/skfolio.moments.ShrunkMu.html#skfolio.moments.ShrunkMu)  | _To be implemented_ |
 | **Bayesian Models**  | | | |
-| ``black_litterman_rm``       |  Black Litterman Model (return + risk model)        | [PyPortOpt - Bkack-Litterman](https://pyportfolioopt.readthedocs.io/en/latest/BlackLitterman.html)  | [black_litterman_rm.py](./pyfpo/input_estimates/robust_models/black_litterman_rm.py) |
+| ``black_litterman_rm``       |  Black Litterman Model (return + risk model)        | [PyPortOpt - Black-Litterman](https://pyportfolioopt.readthedocs.io/en/latest/BlackLitterman.html)  | [black_litterman_rm.py](./pyfpo/input_estimates/robust_models/black_litterman_rm.py) |
 <!-- | ``TBD``       |  -        | [Bayesian Predictive Return Distributions](https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp969.pdf)   | _To be implemented_ |
 | **Regression-Based Return Models**  | | | |
 | ``TBD``       |          | []()   | _To be implemented_ |
