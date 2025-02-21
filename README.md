@@ -87,9 +87,6 @@ PyFinPO aims to satisfy 3 main objectives:
         - 3.2.5) [Portfolio Optimization Solver (Optimizer)](#325-portfolio-optimization-solver-optimizer)
 
     - 3.3) [Portfolio Performance](#33-portfolio-performance)
-        - 3.3.1) [Portfolio Tidy Weights](#331-portfolio-tidy-weights)
-        - 3.3.2) [Portfolio Optimization Performance](#332-portfolio-optimization-performance)
-        - 3.3.3) [Portfolio Discrete Allocation](#333-portfolio-discrete-allocation)
 
     - 3.4) [Portfolio Optimization Post-Processing](#34-portfolio-optimization-post-processing)
         - 3.4.1) [Portfolio Tidy Weights](#341-portfolio-tidy-weights)
