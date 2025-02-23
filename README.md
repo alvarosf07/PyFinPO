@@ -267,7 +267,7 @@ plt.show()
 Once the input estimates have been determined, we can proceed with the portfolio optimization process.
 
 ### 3.2.1) Portfolio Optimization Models
-The first step of the portfolio optimization is to choose the optmization model/framework. The portfolio optimization model of choice is going to determine the type of approach we want for the portfolio optimization, the different objective functions that we will be able to optimize for, and the solver used to approach the optimization problem, among other things. As we will see later on, each optimization model/framework has its particular objective functions and solvers/optimizers. 
+The first step of the portfolio optimization is to choose the optmization model/framework. The model of choice is going to determine the type of approach we want for the portfolio optimization, the different objective functions that we will be able to optimize for, and the solver used to approach the optimization problem, among other things. As we will see later on, each optimization model/framework has its particular objective functions and solvers/optimizers. 
 
 The following Portfolio Optimization Models have been/will be implemented:
 
