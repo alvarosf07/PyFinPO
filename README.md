@@ -438,7 +438,7 @@ The main portfolio optimization constraints available in ``PyFinPO`` are:
 One of the main limitations of ``PyFinPO`` and most other Portfolio Optimization libraries is that the optimization is static (single-period), meaning that based on the input parameters the output optimal portfolio is only valid for a static period of time. Of course, due to the dynamic nature of financial markets it would be preferable to have a dynamic optimization in order to reflect the latest information available in the optimized portfolio and take optimal rebalancing decisions.
 
 Future development plans for PyFinPO include extending the optimization functionalities to address the portfolio optimization problem dynamically. Two main approaches can be found in literature that address PO dynamically, as a Multi-Period Portfolio Optimization (MPPO): 
-- The first approach considers a discretetime PO, where the expected utility of the investor terminal wealth is maximized over a multi-period investment horizon, and portfolio can be rebalanced only at discrete points in time (e.g. for a 1-year PSP, adjusting portfolio weights at the beginning of every month). 
+- The first approach considers a discrete-time PO, where the expected utility of the investor terminal wealth is maximized over a multi-period investment horizon, and portfolio can be rebalanced only at discrete points in time (e.g. for a 1-year PSP, adjusting portfolio weights at the beginning of every month). 
 - The second approach is a continuous-time optimization, where asset weights can be reallocated at any time within the investment horizon. 
 
 [Zhang et. al.](https://link.springer.com/article/10.1007/s10700-017-9266-z) provide a detailed review on the formulation and advantages of dynamic PO techniques.
